@@ -1,0 +1,82 @@
+{
+  "Krish": {
+    "username": "Krish",
+    "pw_hash": "bef231220104d2b91ad292d890b7aca9683cd2350a5813bce98653481e83dbf8",
+    "pw_salt": "789880aa232fe2a24b8935fbf10687f0",
+    "profile_params": {
+      "wpm_mean": 70.0,
+      "wpm_std": 8.4,
+      "hold_mean": 95.0,
+      "error_rate": 0.04
+    },
+    "model_path": "models\\Krish.pkl",
+    "auth_mode": "STRICT",
+    "failed_logins": 0,
+    "session_logs": [],
+    "adaptive_threshold_shift": 0.0
+  },
+  "tubelight": {
+    "username": "tubelight",
+    "pw_hash": "9b813ca9d7c8f2560d587952f71517f61abbb38407644c850c9ac8ee5c95dfc0",
+    "pw_salt": "c8db2bd6304a6fbfb8ba0f10ce01c689",
+    "profile_params": {
+      "wpm_mean": 70.0,
+      "wpm_std": 8.4,
+      "hold_mean": 95.0,
+      "error_rate": 0.04
+    },
+    "model_path": "models\\tubelight.pkl",
+    "auth_mode": "RELAXED",
+    "failed_logins": 0,
+    "session_logs": [],
+    "adaptive_threshold_shift": 0.0
+  },
+  "helo": {
+    "username": "helo",
+    "pw_hash": "b13b0deebf76d33d1a7a4ca4b995c826d29ee7d45ad69f3da3a21063ac6bd449",
+    "pw_salt": "cc27f937596c631798b5d2893d6269fb",
+    "profile_params": {
+      "wpm_mean": 70.0,
+      "wpm_std": 8.4,
+      "hold_mean": 95.0,
+      "error_rate": 0.04
+    },
+    "model_path": "models\\helo.pkl",
+    "auth_mode": "STRICT",
+    "failed_logins": 6,
+    "session_logs": [],
+    "adaptive_threshold_shift": 0.0
+  },
+  "tublelight": {
+    "username": "tublelight",
+    "pw_hash": "72d421c57b4cf7201aa2af52a0fd93e0385b30535d2215d7bf60aba236f2e34b",
+    "pw_salt": "68c119aa8c449eef58e18eabde75f0ee",
+    "profile_params": {
+      "wpm_mean": 72,
+      "wpm_std": 9,
+      "hold_mean": 92,
+      "error_rate": 0.035
+    },
+    "model_path": "models\\tublelight.pkl",
+    "auth_mode": "STRICT",
+    "failed_logins": 1,
+    "session_logs": [],
+    "adaptive_threshold_shift": 0.0
+  },
+  "krish": {
+    "username": "krish",
+    "pw_hash": "d30c19a73f532d4d29eda7728dba41b8cc92fbdeef6d24e491eaa3b35e69a57a",
+    "pw_salt": "882b1340ccbdb4c9a2bc4d81acff9295",
+    "profile_params": {
+      "wpm_mean": 72,
+      "wpm_std": 9,
+      "hold_mean": 92,
+      "error_rate": 0.035
+    },
+    "model_path": "models\\krish.pkl",
+    "auth_mode": "STRICT",
+    "failed_logins": 2,
+    "session_logs": [],
+    "adaptive_threshold_shift": 0.0
+  }
+}
