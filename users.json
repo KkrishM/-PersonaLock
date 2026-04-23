@@ -78,5 +78,21 @@
     "failed_logins": 2,
     "session_logs": [],
     "adaptive_threshold_shift": 0.0
+  },
+  "USER": {
+    "username": "USER",
+    "pw_hash": "381d1e4cd85ac350b8795839db9cb289791a8b7d30b0ecc1c817ea0a32b19257",
+    "pw_salt": "9c5be1455e99ad3c0eeebcec101b5eae",
+    "profile_params": {
+      "wpm_mean": 70.0,
+      "wpm_std": 8.4,
+      "hold_mean": 95.0,
+      "error_rate": 0.04
+    },
+    "model_path": "models\\USER.pkl",
+    "auth_mode": "STRICT",
+    "failed_logins": 3,
+    "session_logs": [],
+    "adaptive_threshold_shift": 0.0
   }
 }

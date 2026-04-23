@@ -1,12 +1,12 @@
-# 🧠 NeuroAuth — AI-Based Continuous Behavioral Authentication
+# TYPEGUARD — AI-Based Continuous Behavioral Authentication
 
 > *Your identity isn't just a password. It's the way you type.*
 
 ---
 
-## 🎯 Project Overview
+##  Project Overview
 
-NeuroAuth is a production-ready behavioral biometric authentication system that verifies users
+TypeGuard is a production-ready behavioral biometric authentication system that verifies users
 not only by their password but by **how they type and move their mouse** — building a unique
 digital fingerprint unique to every individual.
 
@@ -15,8 +15,29 @@ It combines **Machine Learning** (Random Forest pattern recognition) with an **A
 the initial login.
 
 ---
+##  PROBLEM STATEMENT
 
-## 📁 Folder Structure
+Traditional authentication systems rely only on passwords, which:
+
+* Can be stolen, guessed, or shared
+* Do not verify the actual identity of the user
+* Fail to detect impersonation after login
+
+---
+
+##  SOLUTION OVERVIEW
+
+Design a system that:
+
+* Captures behavioral data (typing + mouse)
+* Builds a unique behavioral fingerprint
+* Uses ML models to compare patterns
+* Uses AI to calculate risk and take decisions
+* Continuously monitors the user AFTER login
+
+---
+
+##  Folder Structure
 
 ```
 neuroauth/
@@ -32,7 +53,7 @@ neuroauth/
 
 ---
 
-## 🏗 System Architecture
+##  System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -66,7 +87,7 @@ neuroauth/
 
 ---
 
-## ⚙️ Feature Vector (15 dimensions)
+##  Feature Vector (15 dimensions)
 
 | Feature            | Description                                 |
 |--------------------|---------------------------------------------|
@@ -86,7 +107,7 @@ neuroauth/
 
 ---
 
-## 🚀 How to Run
+##  How to Run
 
 ### 1. Install dependencies
 
@@ -111,7 +132,7 @@ streamlit run app.py
 
 ---
 
-## 🧠 ML Implementation
+##  ML Implementation
 
 - **Algorithm:** Random Forest (200 trees, calibrated probabilities)
 - **Training data:** Synthetic behavioral profiles (800 samples: 400 legit + 400 impostor)
@@ -126,7 +147,7 @@ accuracy over time without storing any raw typing content.
 
 ---
 
-## 🔐 Security Design
+##  Security Design
 
 - **Passwords:** SHA-256 + 128-bit random salt (never stored in plaintext)
 - **Keystroke data:** Only numerical timing features stored (no key identities, no text)
@@ -135,7 +156,7 @@ accuracy over time without storing any raw typing content.
 
 ---
 
-## 🎛 Auth Modes
+##  Auth Modes
 
 | Mode       | ALLOW threshold | CAPTCHA threshold |
 |------------|----------------|-------------------|
@@ -148,7 +169,7 @@ thresholds ±0.5 points per verified result (capped at ±15 points total).
 
 ---
 
-## 📊 Risk Engine Penalties
+##  Risk Engine Penalties
 
 | Signal                        | Score Penalty |
 |-------------------------------|---------------|
@@ -158,7 +179,7 @@ thresholds ±0.5 points per verified result (capped at ±15 points total).
 
 ---
 
-## 🔮 Future Improvements
+##  Future Improvements
 
 1. **Real keystroke capture** via `pynput` for native desktop deployments
 2. **Deep learning model** (LSTM) for sequence-aware typing pattern recognition
