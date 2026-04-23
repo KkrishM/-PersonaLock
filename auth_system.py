@@ -1,5 +1,5 @@
 """
-auth_system.py — NeuroAuth
+auth_system.py — TYPEGUARD
 Core authentication logic:
   • Password hashing (SHA-256 + salt)
   • Behavioral verification (ML model)
@@ -209,7 +209,7 @@ class AuthSession:
 # Auth System — Main Class
 # ─────────────────────────────────────────────
 
-class NeuroAuth:
+class TYPEGUARD:
     """
     High-level authentication system.
     Manages users, models, sessions, and continuous auth.

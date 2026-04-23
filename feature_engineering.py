@@ -1,5 +1,5 @@
 """
-feature_engineering.py — NeuroAuth
+feature_engineering.py — TYPEGUARD
 Converts raw keystroke/mouse events into a compact numerical feature vector.
 All features are normalised or bounded so the ML model trains stably.
 """
@@ -41,7 +41,7 @@ FEATURE_NAMES = [
 NUM_FEATURES = len(FEATURE_NAMES)
 
 @dataclass
-class BehavioralFeatures:
+class BehavioralFeatures :
     """Named feature vector for one authentication attempt."""
     wpm: float
     mean_hold_ms: float

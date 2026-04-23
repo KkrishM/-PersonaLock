@@ -1,5 +1,5 @@
 """
-app.py — NeuroAuth Streamlit Dashboard
+app.py — TYPEGUARD Streamlit Dashboard
 A sleek, dark-themed cybersecurity authentication dashboard.
 
 Run with: streamlit run app.py
@@ -16,7 +16,7 @@ from typing import Dict, List, Optional
 
 # ─── Page Config ──────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="NeuroAuth",
+    page_title="TYPEGUARD",
     page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -191,8 +191,8 @@ hr { border-color: var(--border) !important; }
 
 @st.cache_resource(show_spinner=False)
 def get_auth_system():
-    from auth_system import NeuroAuth
-    return NeuroAuth()
+    from auth_system import TYPEGUARD
+    return TYPEGUARD()
 
 @st.cache_resource(show_spinner=False)
 def get_demo_model():
@@ -235,7 +235,7 @@ def score_color(score: float) -> str:
 
 def render_sidebar():
     with st.sidebar:
-        st.markdown('<div class="hero-header">NEURO<br>AUTH</div>', unsafe_allow_html=True)
+        st.markdown('<div class="hero-header">TYPE<br>GUARD</div>', unsafe_allow_html=True)
         st.markdown('<div class="hero-sub">Behavioral Biometric Engine v1.0</div>', unsafe_allow_html=True)
         st.markdown("---")
         if st.session_state.logged_in:
@@ -247,7 +247,7 @@ def render_sidebar():
             st.markdown("---")
             nav = st.radio("Navigate", ["Dashboard", "Continuous Auth", "Session Logs", "Model Insights"], label_visibility="collapsed")
             st.markdown("---")
-            if st.button("🔒 Logout", use_container_width=True):
+            if st.button(" Logout", use_container_width=True):
                 st.session_state.logged_in = False
                 st.session_state.username = ""
                 st.session_state.page = "login"
@@ -375,13 +375,12 @@ def typing_capture_widget(label: str = "Type the sentence below:", prompt: str =
     return typed, prompt
 
 # ─── Simulate features from typed text ────────────────────────────────────────
-
-def simulate_features_from_input(text: str, hour: int, username: str = "") -> "BehavioralFeatures":
+from feature_engineering import BehavioralFeatures
+def simulate_features_from_input(text: str, hour: int, username: str = "")->"BehavioralFeatures":
     """
     Derive plausible behavioral features from typed text length and
     some session-state entropy. Used when real JS timing is unavailable.
     """
-    from feature_engineering import BehavioralFeatures
     from data_collection import simulate_typing_session, simulate_mouse_session
     from feature_engineering import extract_features
     import hashlib

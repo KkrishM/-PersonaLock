@@ -1,5 +1,5 @@
 """
-model.py — NeuroAuth
+model.py — TYPEGUARD
 Dataset generation, model training, and similarity scoring.
 
 Architecture:

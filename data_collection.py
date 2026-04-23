@@ -1,5 +1,5 @@
 """
-data_collection.py — NeuroAuth
+data_collection.py — TYPEGUARD
 Captures keystroke dynamics and mouse patterns as numerical features only.
 Raw text is NEVER stored — only timing and movement metrics.
 """
