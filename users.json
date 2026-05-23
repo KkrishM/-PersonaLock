@@ -1,17 +1,33 @@
 {
-  "Krish": {
-    "username": "Krish",
-    "pw_hash": "4c433262cb63d94969058f783465620f0ad6319e52272bc17961e856794c32d8",
-    "pw_salt": "4a3d27e47b8659924d60952f20dce332",
+  "krish": {
+    "username": "krish",
+    "pw_hash": "b060b8a90b0b19c551917141d7ef151f8ed6c8e0041773fc70014d49026969fa",
+    "pw_salt": "0c316c0dbc4624bdcfe975c113aac687",
     "profile_params": {
       "wpm_mean": 70.0,
       "wpm_std": 8.4,
       "hold_mean": 95.0,
-      "error_rate": 0.05
+      "error_rate": 0.04
+    },
+    "model_path": "models\\krish.pkl",
+    "auth_mode": "RELAXED",
+    "failed_logins": 2,
+    "session_logs": [],
+    "adaptive_threshold_shift": 0.0
+  },
+  "Krish": {
+    "username": "Krish",
+    "pw_hash": "137e5d406ce45e925f205ec81b5583ca41eed603aecdd058acc4fee95b615127",
+    "pw_salt": "3e6531050e6a0849c12a80dbfeaf496b",
+    "profile_params": {
+      "wpm_mean": 70.0,
+      "wpm_std": 8.4,
+      "hold_mean": 80.0,
+      "error_rate": 0.07
     },
     "model_path": "models\\Krish.pkl",
-    "auth_mode": "ADAPTIVE",
-    "failed_logins": 0,
+    "auth_mode": "RELAXED",
+    "failed_logins": 1,
     "session_logs": [],
     "adaptive_threshold_shift": 0.0
   }

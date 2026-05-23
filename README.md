@@ -3,7 +3,7 @@
 > *Your identity isn't just a password. It's the way you type.*
 
 ---
-
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://YOUR-APP-LINK.streamlit.app)
 ##  Project Overview
 
 TypeGuard is a production-ready behavioral biometric authentication system that verifies users

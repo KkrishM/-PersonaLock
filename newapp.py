@@ -27,150 +27,603 @@ st.markdown("""
 <style>
 
 /* ── Fonts ── */
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
-/* ── Root Colors (LIGHT CYBER THEME) ── */
+/* ── Root Colors (DARK CYBER THEME) ── */
 :root {
-    --bg: #f5f7fb;
-    --surface: #ffffff;
-    --card: rgba(255, 255, 255, 0.85);
-    --border: #dbe3ef;
-    --accent: #0077ff;
-    --accent2: #00c896;
-    --danger: #ff4d4f;
-    --warning: #f5a623;
-    --text: #1f2937;
-    --muted: #6b7280;
+    --bg:        #050d18;
+    --bg2:       #071222;
+    --surface:   #0a1929;
+    --card:      #0d2137;
+    --border:    #0e2d47;
+    --border2:   #1a3a55;
+    --accent:    #00d4ff;
+    --accent2:   #00ff9d;
+    --accent3:   #0077ff;
+    --danger:    #ff3860;
+    --warning:   #ffaa00;
+    --text:      #c9d8e8;
+    --muted:     #4a6a85;
+    --glow:      rgba(0, 212, 255, 0.18);
+    --glow2:     rgba(0, 255, 157, 0.14);
 }
 
 /* ── Global ── */
 html, body, .stApp {
-    background: linear-gradient(135deg, #f5f7fb, #eaf2ff);
+    background: var(--bg) !important;
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+}
+
+/* Subtle scanline overlay */
+.stApp::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.04) 2px,
+        rgba(0,0,0,0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
 }
 
 /* ── Sidebar ── */
 [data-testid="stSidebar"] {
-    background: #ffffff !important;
-    border-right: 1px solid var(--border);
+    background: linear-gradient(180deg, #071222 0%, #050d18 100%) !important;
+    border-right: 1px solid var(--border) !important;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.5);
 }
 
-/* ── Cards ── */
-[data-testid="metric-container"],
-.streamlit-expanderHeader,
-.stAlert {
+[data-testid="stSidebar"]::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+[data-testid="stSidebarContent"] {
+    padding: 1rem 1rem;
+}
+
+/* ── Main content area ── */
+.main .block-container {
+    background: transparent !important;
+    padding-top: 2rem;
+    max-width: 100%;
+}
+
+/* ── Cards / Metric containers ── */
+[data-testid="metric-container"] {
     background: var(--card) !important;
-    backdrop-filter: blur(10px);
+    border: 1px solid var(--border2) !important;
+    border-top: 1px solid rgba(0,212,255,0.25) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(0,212,255,0.08);
+    padding: 16px !important;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+[data-testid="metric-container"]:hover {
+    border-color: rgba(0,212,255,0.4) !important;
+    box-shadow: 0 0 30px rgba(0,212,255,0.12), inset 0 1px 0 rgba(0,212,255,0.12);
+}
+
+[data-testid="metric-container"]::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--accent), var(--accent2));
+    opacity: 0.7;
+}
+
+/* ── Expander ── */
+.streamlit-expanderHeader {
+    background: var(--card) !important;
+    border: 1px solid var(--border2) !important;
+    border-radius: 6px !important;
+    color: var(--accent) !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 11px !important;
+    letter-spacing: 0.1em;
+}
+
+.streamlit-expanderContent {
+    background: var(--surface) !important;
     border: 1px solid var(--border) !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-top: none !important;
+    border-radius: 0 0 6px 6px !important;
+}
+
+/* ── Alerts ── */
+.stAlert {
+    background: rgba(13, 33, 55, 0.9) !important;
+    border: 1px solid var(--border2) !important;
+    border-radius: 6px !important;
+    color: var(--text) !important;
 }
 
 /* ── Buttons ── */
 .stButton > button {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    border: none;
-    color: white;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 8px;
-    padding: 8px 18px;
-    transition: 0.25s ease;
+    background: transparent !important;
+    border: 1px solid var(--accent) !important;
+    color: var(--accent) !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 3px !important;
+    padding: 10px 20px !important;
+    transition: all 0.2s ease !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.stButton > button::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.08), transparent);
+    transition: left 0.4s ease;
+}
+
+.stButton > button:hover::before {
+    left: 100%;
 }
 
 .stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,119,255,0.25);
+    background: rgba(0, 212, 255, 0.08) !important;
+    box-shadow: 0 0 20px rgba(0,212,255,0.25), inset 0 0 20px rgba(0,212,255,0.05) !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+}
+
+.stButton > button:active {
+    transform: translateY(0px) !important;
+    box-shadow: 0 0 10px rgba(0,212,255,0.4) !important;
+}
+
+/* Primary / full-width action buttons */
+[data-testid="baseButton-secondary"][style*="width: 100%"],
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,119,255,0.15)) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 15px rgba(0,212,255,0.2) !important;
 }
 
 /* ── Inputs ── */
-input, textarea {
-    background: #ffffff !important;
-    border: 1px solid var(--border) !important;
+.stTextInput > div > div > input,
+.stTextArea > div > div > textarea {
+    background: var(--surface) !important;
+    border: 1px solid var(--border2) !important;
     color: var(--text) !important;
-    border-radius: 8px !important;
-    font-size: 14px !important;
-    padding: 8px !important;
+    border-radius: 4px !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 12px !important;
+    padding: 10px 12px !important;
+    transition: all 0.2s ease;
 }
 
-input:focus, textarea:focus {
+.stTextInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus {
     border-color: var(--accent) !important;
-    box-shadow: 0 0 6px rgba(0,119,255,0.2);
+    box-shadow: 0 0 0 1px var(--accent), 0 0 12px rgba(0,212,255,0.2) !important;
+}
+
+.stTextInput > div > div > input::placeholder,
+.stTextArea > div > div > textarea::placeholder {
+    color: var(--muted) !important;
+    font-style: italic;
+}
+
+/* ── Labels ── */
+.stTextInput label, .stTextArea label,
+.stSelectbox label, .stSlider label {
+    color: var(--muted) !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 10px !important;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* ── Selectbox ── */
+.stSelectbox > div > div {
+    background: var(--surface) !important;
+    border: 1px solid var(--border2) !important;
+    color: var(--text) !important;
+    border-radius: 4px !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 12px !important;
+}
+
+/* ── Slider ── */
+.stSlider > div > div > div > div {
+    background: linear-gradient(90deg, var(--accent), var(--accent2)) !important;
+}
+
+.stSlider > div > div > div > div > div {
+    background: var(--accent) !important;
+    border: 2px solid #0a1929 !important;
+    box-shadow: 0 0 8px var(--accent) !important;
 }
 
 /* ── Tabs ── */
+.stTabs [data-baseweb="tab-list"] {
+    background: transparent !important;
+    border-bottom: 1px solid var(--border) !important;
+    gap: 4px;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: transparent !important;
+    color: var(--muted) !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 11px !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none !important;
+    padding: 10px 18px !important;
+    transition: all 0.2s;
+}
+
 .stTabs [aria-selected="true"] {
     color: var(--accent) !important;
-    border-bottom: 2px solid var(--accent);
-    font-weight: 600;
+    border-bottom: 2px solid var(--accent) !important;
+    text-shadow: 0 0 10px rgba(0,212,255,0.5);
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    color: var(--text) !important;
+    background: rgba(0,212,255,0.05) !important;
 }
 
 /* ── Progress Bar ── */
 .stProgress > div > div > div {
     background: linear-gradient(90deg, var(--accent), var(--accent2)) !important;
-    border-radius: 6px;
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(0,212,255,0.4);
+}
+.stProgress > div > div {
+    background: var(--border) !important;
+    border-radius: 2px;
+}
+
+/* ── Radio buttons ── */
+.stRadio > div {
+    gap: 4px !important;
+}
+
+.stRadio > div > label {
+    background: transparent !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 4px !important;
+    padding: 10px 14px !important;
+    color: var(--muted) !important;
+    font-family: 'Rajdhani', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    width: 100%;
+}
+
+.stRadio > div > label:hover {
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    background: rgba(0,212,255,0.04) !important;
+}
+
+.stRadio [aria-checked="true"] + label,
+.stRadio > div > label:has(input:checked) {
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    background: rgba(0,212,255,0.08) !important;
+    box-shadow: 0 0 12px rgba(0,212,255,0.15);
+}
+
+/* Hide radio button circles */
+.stRadio > div > label > div:first-child {
+    display: none !important;
+}
+
+/* ── Dataframe ── */
+.stDataFrame {
+    border: 1px solid var(--border) !important;
+    border-radius: 6px !important;
+    overflow: hidden;
+}
+
+.stDataFrame [data-testid="stDataFrameGlideDataEditor"] {
+    background: var(--surface) !important;
+}
+
+/* ── Spinner ── */
+.stSpinner > div {
+    border-color: var(--accent) transparent transparent transparent !important;
+}
+
+/* ── Dividers ── */
+hr {
+    border: none !important;
+    border-top: 1px solid var(--border) !important;
+    margin: 20px 0 !important;
+    opacity: 0.6;
 }
 
 /* ── Hero Header ── */
 .hero-header {
-    font-family: 'Space Mono';
-    font-size: 38px;
+    font-family: 'Space Mono', monospace;
+    font-size: 28px;
     font-weight: 700;
     color: var(--accent);
-    text-align: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(0,212,255,0.5), 0 0 40px rgba(0,212,255,0.2);
+    margin-bottom: 2px;
 }
 
 .hero-sub {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--muted);
-    text-align: center;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
 }
 
 /* ── Section Headings ── */
 .section-head {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
     border-bottom: 1px solid var(--border);
-    margin-bottom: 10px;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+    opacity: 0.9;
 }
 
-/* ── Terminal Card (light version) ── */
+/* ── Terminal / Info Card ── */
 .term-card {
-    background: #f9fbff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px;
-    font-family: 'Space Mono';
-    font-size: 12px;
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-left: 2px solid var(--accent);
+    border-radius: 4px;
+    padding: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    line-height: 1.9;
+    color: var(--text);
 }
 
-.term-line-ok { color: var(--accent2); }
+.term-line-ok   { color: var(--accent2); }
 .term-line-warn { color: var(--warning); }
-.term-line-err { color: var(--danger); }
+.term-line-err  { color: var(--danger); }
 .term-line-info { color: var(--accent); }
 
-/* ── Metrics Text ── */
+/* ── Metric Values ── */
 [data-testid="stMetricValue"] {
-    font-size: 20px !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 22px !important;
     color: var(--accent) !important;
-    font-weight: 600;
+    font-weight: 700 !important;
+    text-shadow: 0 0 12px rgba(0,212,255,0.4);
 }
 
 [data-testid="stMetricLabel"] {
-    font-size: 12px !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 9px !important;
     color: var(--muted) !important;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+[data-testid="stMetricDelta"] {
+    font-size: 11px !important;
+    font-family: 'Space Mono', monospace !important;
+}
+
+/* ── Badge styles ── */
+.badge-low {
+    background: rgba(0,255,157,0.12);
+    color: var(--accent2);
+    border: 1px solid rgba(0,255,157,0.3);
+    padding: 2px 10px;
+    border-radius: 2px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.badge-medium {
+    background: rgba(255,170,0,0.12);
+    color: var(--warning);
+    border: 1px solid rgba(255,170,0,0.3);
+    padding: 2px 10px;
+    border-radius: 2px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.badge-high {
+    background: rgba(255,56,96,0.12);
+    color: var(--danger);
+    border: 1px solid rgba(255,56,96,0.3);
+    padding: 2px 10px;
+    border-radius: 2px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ── Info / Warning / Success / Error ── */
+.stSuccess {
+    background: rgba(0,255,157,0.06) !important;
+    border: 1px solid rgba(0,255,157,0.25) !important;
+    color: var(--accent2) !important;
+    border-radius: 4px !important;
+}
+
+.stWarning {
+    background: rgba(255,170,0,0.06) !important;
+    border: 1px solid rgba(255,170,0,0.25) !important;
+    color: var(--warning) !important;
+    border-radius: 4px !important;
+}
+
+.stError {
+    background: rgba(255,56,96,0.06) !important;
+    border: 1px solid rgba(255,56,96,0.25) !important;
+    color: var(--danger) !important;
+    border-radius: 4px !important;
+}
+
+.stInfo {
+    background: rgba(0,212,255,0.06) !important;
+    border: 1px solid rgba(0,212,255,0.2) !important;
+    color: var(--accent) !important;
+    border-radius: 4px !important;
+}
+
+/* ── Caption / Small text ── */
+.stCaption, small {
+    color: var(--muted) !important;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 10px !important;
+    letter-spacing: 0.08em;
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar {
-    width: 6px;
-}
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 10px;
+    background: var(--border2);
+    border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── Markdown text ── */
+.stMarkdown p {
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.stMarkdown strong {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.stMarkdown code {
+    background: var(--surface) !important;
+    color: var(--accent2) !important;
+    border: 1px solid var(--border2) !important;
+    border-radius: 3px;
+    font-family: 'Space Mono', monospace !important;
+    font-size: 11px !important;
+    padding: 1px 6px !important;
+}
+
+/* ── Sidebar nav item active glow ── */
+[data-testid="stSidebar"] .stRadio > div > label:has(input:checked) {
+    border-left: 2px solid var(--accent) !important;
+    background: rgba(0,212,255,0.06) !important;
+}
+
+/* ── Top-bar decoration ── */
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 16px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+}
+
+.top-bar-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent2);
+    box-shadow: 0 0 8px var(--accent2);
+    animation: pulse-dot 2s ease-in-out infinite;
+    margin-right: 6px;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--accent2); }
+    50% { opacity: 0.6; box-shadow: 0 0 16px var(--accent2); }
+}
+
+/* ── Sidebar logo area ── */
+.sidebar-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 16px rgba(0,212,255,0.5);
+    padding: 8px 0 4px 0;
+}
+
+.sidebar-version {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.sidebar-status {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent2);
+    letter-spacing: 0.1em;
+}
+
+/* ── Section card wrapper ── */
+.cyber-card {
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cyber-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent);
 }
 
 </style>
@@ -224,28 +677,59 @@ def score_color(score: float) -> str:
 
 def render_sidebar():
     with st.sidebar:
-        st.markdown('<div class="hero-header">TYPE<br>GUARD</div>', unsafe_allow_html=True)
-        st.markdown('<div class="hero-sub">Behavioral Biometric Engine v1.0</div>', unsafe_allow_html=True)
-        st.markdown("---")
+        st.markdown('<div class="sidebar-logo">TYPEGUARD</div>', unsafe_allow_html=True)
+        st.markdown('<div class="sidebar-version">Continuous Auth · v1.0</div>', unsafe_allow_html=True)
+
         if st.session_state.logged_in:
-            st.markdown(f"**Logged in as:** `{st.session_state.username}`")
-            if st.session_state.last_report:
-                r = st.session_state.last_report
-                st.markdown(f"**Match score:** `{r['similarity_score']}%`")
-                st.markdown(f"**Risk:** {risk_badge(r['risk_level'])}", unsafe_allow_html=True)
-            st.markdown("---")
+            r = st.session_state.last_report
+            score_val = r['similarity_score'] if r else "—"
+            risk_val  = r['risk_level'] if r else "—"
+            risk_color = {"LOW": "#00ff9d", "MEDIUM": "#ffaa00", "HIGH": "#ff3860"}.get(risk_val, "#4a6a85")
+            st.markdown(f"""
+            <div style="background:#071222;border:1px solid #0e2d47;border-radius:4px;padding:12px 14px;margin-bottom:18px;">
+                <div style="font-family:'Space Mono',monospace;font-size:9px;color:#4a6a85;letter-spacing:0.15em;margin-bottom:6px;">ACTIVE SESSION</div>
+                <div style="font-family:'Space Mono',monospace;font-size:12px;color:#c9d8e8;margin-bottom:4px;">
+                    <span style="color:#4a6a85">USER /</span> {st.session_state.username.upper()}
+                </div>
+                <div style="display:flex;gap:12px;margin-top:8px;">
+                    <div>
+                        <div style="font-family:'Space Mono',monospace;font-size:9px;color:#4a6a85;letter-spacing:0.1em;">MATCH</div>
+                        <div style="font-family:'Space Mono',monospace;font-size:14px;color:#00d4ff;font-weight:700;">{score_val}{'%' if r else ''}</div>
+                    </div>
+                    <div>
+                        <div style="font-family:'Space Mono',monospace;font-size:9px;color:#4a6a85;letter-spacing:0.1em;">RISK</div>
+                        <div style="font-family:'Space Mono',monospace;font-size:14px;color:{risk_color};font-weight:700;">{risk_val}</div>
+                    </div>
+                </div>
+                <div style="margin-top:10px;display:flex;align-items:center;gap:6px;">
+                    <span class="status-dot"></span>
+                    <span style="font-family:'Space Mono',monospace;font-size:9px;color:#00ff9d;letter-spacing:0.1em;">AUTH ACTIVE</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            st.markdown('<div style="font-family:Space Mono,monospace;font-size:9px;color:#4a6a85;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;">Navigation</div>', unsafe_allow_html=True)
             nav = st.radio("Navigate", ["Dashboard", "Continuous Auth", "Session Logs", "Model Insights"], label_visibility="collapsed")
             st.markdown("---")
-            if st.button(" Logout", use_container_width=True):
+            if st.button("⬡  LOCK SESSION", use_container_width=True):
                 st.session_state.logged_in = False
                 st.session_state.username = ""
                 st.session_state.page = "login"
                 st.rerun()
             return nav
         else:
+            st.markdown('<div style="font-family:Space Mono,monospace;font-size:9px;color:#4a6a85;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:8px;">Access</div>', unsafe_allow_html=True)
             nav = st.radio("Navigate", ["Login", "Register"], label_visibility="collapsed")
             st.markdown("---")
-            st.markdown('<div class="term-card"><span class="term-line-info">// SYSTEM STATUS</span><br><span class="term-line-ok">● AUTH ENGINE: ONLINE</span><br><span class="term-line-ok">● ML MODEL: READY</span><br><span class="term-line-ok">● RISK ENGINE: ACTIVE</span></div>', unsafe_allow_html=True)
+            st.markdown("""
+            <div class="term-card">
+                <span class="term-line-info">// SYSTEM STATUS</span><br>
+                <span class="term-line-ok">● AUTH ENGINE: ONLINE</span><br>
+                <span class="term-line-ok">● ML MODEL: READY</span><br>
+                <span class="term-line-ok">● RISK ENGINE: ACTIVE</span><br>
+                <span class="term-line-info">● BIOMETRIC: STANDBY</span>
+            </div>
+            """, unsafe_allow_html=True)
             return nav
 
 # ─── Typing Capture Widget ─────────────────────────────────────────────────────
@@ -271,28 +755,40 @@ def typing_capture_widget(label: str = "Type the sentence below:", prompt: str =
     # JS-powered keystroke capture embedded in a component
     components_html = f"""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
     #typing-area {{
         width: 100%;
-        background: #0d1117;
-        border: 1px solid #1e2d3d;
-        color: #c9d1d9;
+        background: #071222;
+        border: 1px solid #0e2d47;
+        border-left: 2px solid #00d4ff;
+        color: #c9d8e8;
         font-family: 'Space Mono', monospace;
-        font-size: 14px;
-        padding: 12px;
-        border-radius: 6px;
+        font-size: 13px;
+        padding: 14px;
+        border-radius: 4px;
         outline: none;
         box-sizing: border-box;
-        transition: border-color .2s;
+        transition: border-color .2s, box-shadow .2s;
+        resize: none;
     }}
-    #typing-area:focus {{ border-color: #00d4ff; box-shadow: 0 0 8px rgba(0,212,255,.2); }}
+    #typing-area:focus {{ border-color: #00d4ff; box-shadow: 0 0 0 1px #00d4ff, 0 0 14px rgba(0,212,255,.2); }}
+    #typing-area::placeholder {{ color: #4a6a85; font-style: italic; }}
     #stats-display {{
         font-family: 'Space Mono', monospace;
-        font-size: 11px;
-        color: #586069;
-        margin-top: 6px;
-        display: flex; gap: 20px;
+        font-size: 10px;
+        color: #4a6a85;
+        margin-top: 8px;
+        display: flex; gap: 10px; flex-wrap: wrap;
     }}
-    .stat-pill {{ background: #111820; border: 1px solid #1e2d3d; padding: 3px 10px; border-radius: 12px; }}
+    .stat-pill {{
+        background: #0a1929;
+        border: 1px solid #0e2d47;
+        padding: 4px 12px;
+        border-radius: 2px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }}
+    .stat-pill span {{ color: #00d4ff; }}
     </style>
     <textarea id="typing-area" rows="2" placeholder="Start typing here..."></textarea>
     <div id="stats-display">
@@ -391,9 +887,15 @@ def simulate_features_from_input(text: str, hour: int, username: str = "")->"Beh
 # ─── Pages ────────────────────────────────────────────────────────────────────
 
 def page_login():
-    st.markdown('<div class="hero-header">SIGN IN</div>', unsafe_allow_html=True)
-    st.markdown('<div class="hero-sub">Multi-factor behavioral authentication</div>', unsafe_allow_html=True)
-    st.markdown("---")
+    st.markdown("""
+    <div class="top-bar">
+        <div>
+            <div class="hero-header">SIGN IN</div>
+            <div class="hero-sub">Multi-factor behavioral authentication</div>
+        </div>
+        <div class="top-bar-title"><span class="status-dot"></span>SYSTEM_STATUS: ACTIVE</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     col1, col2 = st.columns([1.2, 1])
 
@@ -474,9 +976,15 @@ def page_login():
 
 
 def page_register():
-    st.markdown('<div class="hero-header">REGISTER</div>', unsafe_allow_html=True)
-    st.markdown('<div class="hero-sub">Create a behavioral identity profile</div>', unsafe_allow_html=True)
-    st.markdown("---")
+    st.markdown("""
+    <div class="top-bar">
+        <div>
+            <div class="hero-header">REGISTER</div>
+            <div class="hero-sub">Create a behavioral identity profile</div>
+        </div>
+        <div class="top-bar-title"><span class="status-dot"></span>ENROLLMENT MODE</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     col1, col2 = st.columns([1.2, 1])
     with col1:
@@ -531,9 +1039,18 @@ def page_register():
 
 
 def page_dashboard():
-    st.markdown('<div class="hero-header">DASHBOARD</div>', unsafe_allow_html=True)
-    st.markdown(f'<div class="hero-sub">Session: {st.session_state.username} · {datetime.now().strftime("%Y-%m-%d %H:%M")}</div>', unsafe_allow_html=True)
-    st.markdown("---")
+    now_str = datetime.now().strftime("%H:%M:%S")
+    user_str = st.session_state.username.upper()
+    st.markdown(
+        f'''<div class="top-bar">
+        <div>
+            <div class="hero-header">DASHBOARD</div>
+            <div class="hero-sub">Identity assurance · Real-time behavioral monitoring</div>
+        </div>
+        <div class="top-bar-title"><span class="status-dot"></span>{user_str} · {now_str}</div>
+    </div>''',
+        unsafe_allow_html=True,
+    )
 
     r = st.session_state.last_report
     if not r:
@@ -662,9 +1179,15 @@ def page_dashboard():
 
 
 def page_continuous_auth():
-    st.markdown('<div class="hero-header">CONTINUOUS AUTH</div>', unsafe_allow_html=True)
-    st.markdown('<div class="hero-sub">Live behavioral re-verification during session</div>', unsafe_allow_html=True)
-    st.markdown("---")
+    st.markdown("""
+    <div class="top-bar">
+        <div>
+            <div class="hero-header">CONTINUOUS AUTH</div>
+            <div class="hero-sub">Live behavioral re-verification during session</div>
+        </div>
+        <div class="top-bar-title"><span class="status-dot"></span>LIVE MONITOR</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     typed, prompt = typing_capture_widget(label="continuous_type", prompt="Authenticate your session now")
 
@@ -708,9 +1231,15 @@ def page_continuous_auth():
 
 
 def page_session_logs():
-    st.markdown('<div class="hero-header">SESSION LOGS</div>', unsafe_allow_html=True)
-    st.markdown('<div class="hero-sub">Audit trail of authentication events</div>', unsafe_allow_html=True)
-    st.markdown("---")
+    st.markdown("""
+    <div class="top-bar">
+        <div>
+            <div class="hero-header">SECURITY LOGS</div>
+            <div class="hero-sub">Real-time behavioral biometric audit trail</div>
+        </div>
+        <div class="top-bar-title"><span class="status-dot"></span>AUDIT TRAIL</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     logs = st.session_state.session_logs
     if not logs:
@@ -721,12 +1250,13 @@ def page_session_logs():
         rl = log.get('risk', 'LOW')
         color = '#00ff88' if rl=='LOW' else '#ffaa00' if rl=='MEDIUM' else '#ff3860'
         st.markdown(f"""
-        <div style="background:#0d1117;border:1px solid #1e2d3d;border-left:3px solid {color};
-                    padding:10px 16px;border-radius:4px;margin-bottom:8px;font-family:Space Mono;font-size:12px">
-            <span style="color:#586069">[{log['time']}]</span>
-            <span style="color:{color};margin:0 12px">{log['event']}</span>
-            <span style="color:#c9d1d9">score={log['score']}%</span>
-            <span style="color:{color};margin-left:12px">RISK:{rl}</span>
+        <div style="background:#071222;border:1px solid #0e2d47;border-left:2px solid {color};
+                    padding:12px 18px;border-radius:4px;margin-bottom:6px;font-family:'Space Mono',monospace;font-size:11px;
+                    display:flex;align-items:center;gap:16px;justify-content:space-between;">
+            <span style="color:#4a6a85;min-width:70px">[{log['time']}]</span>
+            <span style="color:{color};flex:1;letter-spacing:0.08em">{log['event']}</span>
+            <span style="color:#c9d8e8">SCORE: <span style="color:#00d4ff;font-weight:700">{log['score']}%</span></span>
+            <span style="color:{color};background:rgba(0,0,0,0.3);border:1px solid {color}33;padding:2px 8px;border-radius:2px;font-size:9px;letter-spacing:0.1em">RISK: {rl}</span>
         </div>
         """, unsafe_allow_html=True)
 
@@ -736,9 +1266,15 @@ def page_session_logs():
 
 
 def page_model_insights():
-    st.markdown('<div class="hero-header">MODEL INSIGHTS</div>', unsafe_allow_html=True)
-    st.markdown('<div class="hero-sub">ML training data & feature importance analysis</div>', unsafe_allow_html=True)
-    st.markdown("---")
+    st.markdown("""
+    <div class="top-bar">
+        <div>
+            <div class="hero-header">MODEL INSIGHTS</div>
+            <div class="hero-sub">Deep behavioral biometric explainability engine</div>
+        </div>
+        <div class="top-bar-title"><span class="status-dot"></span>ML_ENGINE: STABLE</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     with st.spinner("Loading model data..."):
         model, df, metrics = get_demo_model()
